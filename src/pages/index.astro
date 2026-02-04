@@ -1,0 +1,67 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import AnimatedHero from '../components/AnimatedHero.astro';
+import VenturesGrid from '../components/VenturesGrid.astro';
+import Timeline from '../components/Timeline.astro';
+import YouTubeSection from '../components/YouTubeSection.astro';
+import BlogPostCard from '../components/BlogPostCard.astro';
+import Newsletter from '../components/Newsletter.astro';
+
+// Get latest blog posts
+const allPosts = await getCollection('blog');
+const latestPosts = allPosts
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+---
+
+<Layout
+  title="Ross Starkey - Commercial Pilot, Entrepreneur, Builder"
+  description="Boeing 787 pilot building businesses at 40,000 feet. RepPilot founder, SEO consultant, property investor, and AI builder."
+>
+  <!-- Hero Section -->
+  <AnimatedHero />
+
+  <!-- Ventures Section -->
+  <VenturesGrid />
+
+  <!-- Timeline Section -->
+  <Timeline />
+
+  <!-- YouTube Section -->
+  <YouTubeSection />
+
+  <!-- Latest Blog Posts Section -->
+  <section class="max-w-7xl mx-auto px-6 py-24">
+    <div class="flex items-center justify-between mb-12">
+      <div>
+        <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">Latest Posts</h2>
+        <p class="text-xl text-gray-400">Insights on aviation, entrepreneurship, and building</p>
+      </div>
+      <a href="/blog" class="text-teal-400 hover:text-teal-300 font-medium hidden md:block">
+        View all →
+      </a>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {latestPosts.map((post) => (
+        <BlogPostCard
+          title={post.data.title}
+          description={post.data.description}
+          date={post.data.date.toISOString()}
+          slug={post.slug}
+        />
+      ))}
+    </div>
+    <div class="mt-8 text-center md:hidden">
+      <a href="/blog" class="text-teal-400 hover:text-teal-300 font-medium">
+        View all posts →
+      </a>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="max-w-7xl mx-auto px-6 py-24">
+    <Newsletter />
+  </section>
+</Layout>

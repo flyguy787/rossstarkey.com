@@ -1,0 +1,75 @@
+---
+const videos = [
+  {
+    title: "Signs You're Building Wealth (Even If Your Bank Balance Doesn't Show It Yet)",
+    thumbnail: "https://img.youtube.com/vi/2F0X9e_rbLw/maxresdefault.jpg",
+    url: "https://youtube.com/watch?v=2F0X9e_rbLw"
+  },
+  {
+    title: "Financial Literacy for Beginners: The Pilot's Checklist (ORDER MATTERS)",
+    thumbnail: "https://img.youtube.com/vi/E49uORrTpzo/maxresdefault.jpg",
+    url: "https://youtube.com/watch?v=E49uORrTpzo"
+  },
+  {
+    title: "The Part of Compound Interest Nobody Talks About",
+    thumbnail: "https://img.youtube.com/vi/AzvmOuecox4/maxresdefault.jpg",
+    url: "https://youtube.com/watch?v=AzvmOuecox4"
+  },
+  {
+    title: "When Your SALARY Hits, This Payday Habit Builds Real Wealth",
+    thumbnail: "https://img.youtube.com/vi/t1vued4d_Cs/maxresdefault.jpg",
+    url: "https://youtube.com/watch?v=t1vued4d_Cs"
+  }
+];
+---
+
+<section class="max-w-7xl mx-auto px-6 py-24 bg-gradient-to-b from-transparent via-teal-500/5 to-transparent">
+  <div class="mb-16 text-center">
+    <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">Latest on YouTube</h2>
+    <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-8">
+      Sharing insights on aviation, entrepreneurship, and building with AI
+    </p>
+    <a
+      href="https://www.youtube.com/channel/UCzWSbmjoSQXIO2rUe6XUk7Q"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all font-medium"
+    >
+      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+      </svg>
+      Subscribe on YouTube
+    </a>
+  </div>
+
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {videos.map((video) => (
+      <a
+        href={video.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group bg-gray-900/50 border border-gray-800 rounded-xl overflow-hidden hover:border-teal-500/50 transition-all hover:scale-[1.02]"
+      >
+        <div class="relative aspect-video bg-gray-800">
+          <img
+            src={video.thumbnail}
+            alt={video.title}
+            class="w-full h-full object-cover group-hover:opacity-80 transition-opacity"
+          />
+          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center">
+              <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-lg font-bold text-white group-hover:text-teal-400 transition-colors line-clamp-2">
+            {video.title}
+          </h3>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>

@@ -1,0 +1,82 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+
+const projects = [
+  {
+    title: 'Project One',
+    description: 'A comprehensive web application built with modern technologies. Features include real-time updates, user authentication, and data visualization.',
+    link: 'https://github.com/yourusername/project-one',
+    tags: ['React', 'TypeScript', 'Node.js']
+  },
+  {
+    title: 'Project Two',
+    description: 'An open-source tool that helps developers streamline their workflow. Built with performance and developer experience in mind.',
+    link: 'https://github.com/yourusername/project-two',
+    tags: ['Python', 'CLI', 'DevTools']
+  },
+  {
+    title: 'Project Three',
+    description: 'A mobile-first application focused on user experience and accessibility. Implements modern design patterns and best practices.',
+    link: 'https://github.com/yourusername/project-three',
+    tags: ['React Native', 'Mobile', 'UI/UX']
+  },
+  {
+    title: 'Project Four',
+    description: 'A static site generator plugin that extends functionality with custom components and integrations. Used by hundreds of developers.',
+    link: 'https://github.com/yourusername/project-four',
+    tags: ['JavaScript', 'Plugin', 'Open Source']
+  },
+  {
+    title: 'Project Five',
+    description: 'A real-time collaboration tool for remote teams. Features include video chat, screen sharing, and integrated task management.',
+    link: 'https://github.com/yourusername/project-five',
+    tags: ['WebRTC', 'Socket.io', 'Vue.js']
+  },
+  {
+    title: 'Project Six',
+    description: 'An API service that provides data aggregation and analytics for e-commerce platforms. Handles millions of requests daily.',
+    link: 'https://github.com/yourusername/project-six',
+    tags: ['Go', 'PostgreSQL', 'Docker']
+  }
+];
+---
+
+<Layout
+  title="Projects - Your Name"
+  description="A collection of my work including web applications, tools, and open-source contributions."
+>
+  <div class="max-w-6xl mx-auto px-6 py-16">
+    <div class="mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Projects</h1>
+      <p class="text-xl text-gray-600 max-w-3xl">
+        A selection of projects I've worked on, ranging from web applications to developer tools.
+        Most are open source and available on GitHub.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {projects.map((project) => (
+        <ProjectCard {...project} />
+      ))}
+    </div>
+
+    <!-- Call to action -->
+    <div class="mt-16 text-center">
+      <div class="bg-gray-50 border border-gray-200 rounded-lg p-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">
+          Interested in working together?
+        </h2>
+        <p class="text-gray-600 mb-6 max-w-2xl mx-auto">
+          I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+        </p>
+        <a
+          href="/contact"
+          class="inline-block px-6 py-3 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors font-medium"
+        >
+          Get In Touch
+        </a>
+      </div>
+    </div>
+  </div>
+</Layout>

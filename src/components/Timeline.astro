@@ -1,0 +1,126 @@
+---
+interface TimelineItem {
+  year: string;
+  title: string;
+  description: string;
+}
+
+const timelineItems: TimelineItem[] = [
+  {
+    year: "1997",
+    title: "The Aviation Bug",
+    description: "Knew aviation had given me the bug, left school to pursue a flying career by working at the airport whilst I figured out where to start."
+  },
+  {
+    year: "1999",
+    title: "First Steps to Flying",
+    description: "Saved and started building towards a private pilots license."
+  },
+  {
+    year: "2001",
+    title: "PPL Complete",
+    description: "PPL in the bag, now on to the serious matter of Airline Transport Pilot Licence (Commercial)."
+  },
+  {
+    year: "2004",
+    title: "Life & Property Journey Begins",
+    description: "Meet my beautiful wife (to be!) and our property journey started in parallel."
+  },
+  {
+    year: "2006",
+    title: "ATPL Achieved",
+    description: "Year after year of studying, delays so I could save, finally got the ATPL, but no jobs on the horizon!"
+  },
+  {
+    year: "2007",
+    title: "First Commercial Airline Job",
+    description: "After 10 grueling years of hard graft and basically no life, manage to land my first commercial airline job, Airbus A320 out of Heathrow."
+  },
+  {
+    year: "2008",
+    title: "Saved by Another Airline",
+    description: "First airline didn't last but another airline came and saved us!"
+  },
+  {
+    year: "2012",
+    title: "Saved Again",
+    description: "Second airline didn't last, but another came and saved us, AGAIN!"
+  },
+  {
+    year: "2015",
+    title: "Upgrade to Long-Haul",
+    description: "Went from the A320 shorthaul to B777 longhaul."
+  },
+  {
+    year: "2016",
+    title: "Boeing 787 Dreamliner",
+    description: "Sidestep on to the B787."
+  },
+  {
+    year: "2018",
+    title: "Filling Downroute Time",
+    description: "With a couple of years in longhaul, now looking to fill my spare time downroute."
+  },
+  {
+    year: "2019",
+    title: "Marketing & Website Building",
+    description: "Started to learn marketing and stumbled on website building."
+  },
+  {
+    year: "2020",
+    title: "First Paying Client",
+    description: "Website building lead to ranking websites and my very first paying client."
+  },
+  {
+    year: "2023",
+    title: "RepPilot Launch",
+    description: "Built RepPilot as seen a need for small business owners that needed help with their online reputation."
+  },
+  {
+    year: "2025",
+    title: "AI Revolution",
+    description: "AI has now arrived and learning what it can do to help me and my business."
+  },
+  {
+    year: "2026",
+    title: "Building in Public",
+    description: "Started YouTube channel and utilising X to create a branded social platform that will show me learning in public."
+  }
+];
+---
+
+<section class="max-w-7xl mx-auto px-6 py-24">
+  <div class="mb-16 text-center">
+    <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">The Journey</h2>
+    <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+      Nearly 30 years from leaving school with a dream to flying the 787 and building businesses worldwide
+    </p>
+  </div>
+
+  <div class="relative">
+    <!-- Timeline line -->
+    <div class="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-teal-500 via-teal-500/50 to-transparent"></div>
+
+    <div class="space-y-12">
+      {timelineItems.map((item, index) => (
+        <div class={`relative flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+          <!-- Timeline dot -->
+          <div class="absolute left-8 md:left-1/2 w-4 h-4 bg-teal-500 rounded-full -ml-2 ring-4 ring-[#0a0a0a] z-10"></div>
+
+          <!-- Content -->
+          <div class={`w-full md:w-1/2 ${index % 2 === 0 ? 'md:pr-16 pl-20 md:pl-0' : 'md:pl-16 pl-20 md:pl-0'}`}>
+            <div class="bg-gray-900/50 border border-gray-800 rounded-lg p-6 hover:border-teal-500/50 transition-all">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="text-teal-400 text-sm font-bold px-3 py-1 bg-teal-500/10 rounded-full">
+                  {item.year}
+                </span>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-2">{item.title}</h3>
+              <p class="text-gray-400 leading-relaxed">{item.description}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
