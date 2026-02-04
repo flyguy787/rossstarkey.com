@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://yourdomain.com', // Update this with your actual domain
+  site: 'https://rossstarkey.com',
   vite: {
     plugins: [tailwindcss()]
   },
