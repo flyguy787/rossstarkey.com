@@ -60,57 +60,44 @@ Total cost: $0/month.
 
 ## How I Actually Built It
 
-Here's the honest process.
+Here's the honest timeline.
 
-**Day 1: Setup (2 hours)**
+**Hour 1: From Zero to Live Website**
 
-Installing the tools took longer than expected. Not because it was hard, but because I'd never used a terminal before.
+I installed the tools (Node.js, VS Code, Claude Code, GitHub Desktop). Never used a terminal before, but the installers walked me through everything.
 
-I installed:
-- Node.js (needed to run Astro)
-- VS Code (the code editor)
-- Claude Code (the AI assistant)
-- GitHub Desktop (for version control)
-
-Once everything was installed, I opened Claude Code and typed:
+Then I opened Claude Code and typed:
 
 "Create a new Astro website with Tailwind CSS. Dark theme. Teal accents. Make it look modern and professional."
 
-Claude built the entire foundation in about 2 minutes.
+Claude built the entire thing in 2 minutes.
 
-**Day 2: Customization (3 hours)**
+I pushed it to GitHub. Connected Vercel. Clicked deploy.
 
-This is where it got interesting.
+**The site was live before I went to bed.**
 
-I just talked to Claude like a person:
+That's it. One hour from "I should build a website" to a live, professional site on the internet.
 
-- "Add a blog section where I can write articles"
-- "Create a videos page to showcase my YouTube content"
-- "Make the homepage hero section bigger"
-- "Add my bio to the about page"
+**The Next Morning: Adding Content**
 
-Every request took 30-60 seconds to implement.
+I spent 30 minutes playing around with prompts:
 
-When something didn't look right, I'd say:
-"That spacing feels off. Make it tighter."
+- "Add a blog section"
+- "Create a videos page for my YouTube content"
+- "Add my first blog post about [topic]"
+- "Upload this video and create a page for it"
 
-Claude would adjust it instantly.
+Every change went live in 30 seconds. Just push to GitHub and Vercel rebuilds automatically.
 
-**Day 3: Content (2 hours)**
+By lunchtime, I had:
+- A complete blog with my first article published
+- A videos section showcasing my YouTube content
+- Custom domain pointing to the site
+- Everything looking exactly how I wanted
 
-I wrote my first blog post. Added my first video. Set up the navigation structure.
+**Total time invested: 90 minutes.**
 
-All content is written in Markdown files. Simple text files that turn into beautifully formatted pages.
-
-No database. No admin panel. Just files in a folder.
-
-**Day 4: Deployment (1 hour)**
-
-Pushed everything to GitHub. Connected Vercel. Clicked "Deploy."
-
-60 seconds later, the site was live.
-
-Added my custom domain. Updated DNS settings. 24 hours later, rossstarkey.com was pointing to my new site.
+Not days. Not weeks. An hour and a half.
 
 ---
 
@@ -217,7 +204,7 @@ You don't need to be technical. You just need to be willing to try something new
 
 ## The Bottom Line
 
-I built a professional website in about 8 hours of actual work.
+I built a professional website in 90 minutes.
 
 Zero code written by me. Zero monthly fees. Zero compromises.
 
