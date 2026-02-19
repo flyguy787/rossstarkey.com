@@ -1,7 +1,8 @@
 ---
 title: "Signs You're Building Wealth (Even If It Doesn't Feel Like It)"
 description: "Real wealth doesn't feel like winning. It feels like your life stops breaking. Here are 8 signs you're building wealth — even if your bank balance doesn't show it yet."
-date: 2026-02-19
+date: 2026-01-24
+author: "Ross Starkey"
 draft: false
 tags: ["finance", "wealth", "mindset", "personal finance"]
 ---
