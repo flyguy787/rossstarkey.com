@@ -1,0 +1,152 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const videos = await getCollection('videos', ({ data }) => !data.draft);
+  return videos.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+
+const thumbnailUrl = `https://img.youtube.com/vi/${data.videoId}/maxresdefault.jpg`;
+const embedUrl = `https://www.youtube.com/embed/${data.videoId}`;
+const watchUrl = `https://www.youtube.com/watch?v=${data.videoId}`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const formattedDate = data.date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+
+const videoSchema = {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": data.title,
+  "description": data.description,
+  "thumbnailUrl": thumbnailUrl,
+  "uploadDate": data.date.toISOString(),
+  "embedUrl": embedUrl,
+  "contentUrl": watchUrl,
+};
+---
+
+<Layout
+  title={`${data.title} - Ross Starkey`}
+  description={data.description}
+  image={thumbnailUrl}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(videoSchema)} slot="head" />
+
+  <article class="max-w-4xl mx-auto px-6 py-16">
+    <!-- Back link -->
+    <a
+      href="/videos"
+      class="inline-flex items-center gap-2 text-teal-400 hover:text-teal-300 mb-8 font-medium"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+      All Videos
+    </a>
+
+    <!-- Video header -->
+    <header class="mb-8">
+      <time class="text-teal-400 font-medium">{formattedDate}</time>
+      <h1 class="text-3xl md:text-4xl font-bold text-white mt-4 mb-4">
+        {data.title}
+      </h1>
+      <p class="text-lg text-gray-400 leading-relaxed">{data.description}</p>
+      {data.tags && data.tags.length > 0 && (
+        <div class="flex flex-wrap gap-2 mt-4">
+          {data.tags.map((tag: string) => (
+            <span class="px-3 py-1 bg-teal-500/10 text-teal-400 text-sm rounded-full">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <!-- YouTube embed -->
+    <div class="relative aspect-video bg-gray-800 rounded-xl overflow-hidden mb-10">
+      <iframe
+        src={embedUrl}
+        title={data.title}
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        class="absolute inset-0 w-full h-full"
+      ></iframe>
+    </div>
+
+    <!-- Key takeaways -->
+    {data.keyTakeaways && data.keyTakeaways.length > 0 && (
+      <div class="bg-gray-900/50 border border-gray-800 rounded-xl p-8 mb-10">
+        <h2 class="text-xl font-bold text-white mb-6">Key Takeaways</h2>
+        <ul class="space-y-4">
+          {data.keyTakeaways.map((point: string) => (
+            <li class="flex items-start gap-3">
+              <span class="text-teal-400 mt-1 shrink-0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </span>
+              <span class="text-gray-300 leading-relaxed">{point}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    <!-- Related blog post link -->
+    {data.relatedPost && (
+      <div class="bg-teal-500/10 border border-teal-500/30 rounded-xl p-6 mb-10">
+        <p class="text-gray-300 mb-3">Want the full written breakdown?</p>
+        <a
+          href={`/blog/${data.relatedPost}`}
+          class="inline-flex items-center gap-2 text-teal-400 hover:text-teal-300 font-medium"
+        >
+          Read the companion article
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    )}
+
+    <!-- Subscribe CTA -->
+    <div class="bg-gray-900/50 border border-gray-800 rounded-xl p-8 text-center">
+      <h2 class="text-xl font-bold text-white mb-3">Enjoyed this video?</h2>
+      <p class="text-gray-400 mb-6">Subscribe for weekly insights on finance, aviation, and building wealth.</p>
+      <a
+        href="https://www.youtube.com/channel/UCzWSbmjoSQXIO2rUe6XUk7Q"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all font-medium"
+      >
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        </svg>
+        Subscribe on YouTube
+      </a>
+    </div>
+
+    <!-- Back link -->
+    <footer class="mt-12 pt-8 border-t border-gray-800">
+      <a
+        href="/videos"
+        class="inline-flex items-center gap-2 text-teal-400 hover:text-teal-300 font-medium"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        All Videos
+      </a>
+    </footer>
+  </article>
+</Layout>

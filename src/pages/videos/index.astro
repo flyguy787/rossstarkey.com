@@ -1,0 +1,59 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allVideos = await getCollection('videos');
+const sortedVideos = allVideos
+  .filter(v => !v.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<Layout
+  title="Videos - Ross Starkey"
+  description="Watch videos on personal finance, aviation, entrepreneurship, and building wealth. New videos every week."
+>
+  <div class="max-w-7xl mx-auto px-6 py-16">
+    <div class="mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Videos</h1>
+      <p class="text-xl text-gray-400">
+        Insights on finance, aviation, and building wealth — in video form.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {sortedVideos.map((video) => (
+        <a
+          href={`/videos/${video.slug}`}
+          class="group bg-gray-900/50 border border-gray-800 rounded-xl overflow-hidden hover:border-teal-500/50 transition-all hover:scale-[1.02]"
+        >
+          <div class="relative aspect-video bg-gray-800">
+            <img
+              src={`https://img.youtube.com/vi/${video.data.videoId}/maxresdefault.jpg`}
+              alt={video.data.title}
+              class="w-full h-full object-cover group-hover:opacity-80 transition-opacity"
+            />
+            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center">
+                <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="p-6">
+            <h2 class="text-lg font-bold text-white group-hover:text-teal-400 transition-colors line-clamp-2 mb-3">
+              {video.data.title}
+            </h2>
+            <p class="text-gray-400 text-sm line-clamp-2">{video.data.description}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    {sortedVideos.length === 0 && (
+      <div class="text-center py-12">
+        <p class="text-gray-400 text-lg">No videos yet. Check back soon!</p>
+      </div>
+    )}
+  </div>
+</Layout>

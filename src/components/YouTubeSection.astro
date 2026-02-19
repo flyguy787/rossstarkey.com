@@ -1,24 +1,34 @@
 ---
 const videos = [
   {
+    title: "7 Levels of Financial Freedom - Where Do You Stand?",
+    thumbnail: "https://img.youtube.com/vi/tY2q5RrMQQs/maxresdefault.jpg",
+    url: "/videos/7-levels-financial-freedom"
+  },
+  {
+    title: "Debt Free Living — Now What?",
+    thumbnail: "https://img.youtube.com/vi/K4vOmwXdvew/maxresdefault.jpg",
+    url: "/videos/debt-free-living-now-what"
+  },
+  {
     title: "Signs You're Building Wealth (Even If Your Bank Balance Doesn't Show It Yet)",
     thumbnail: "https://img.youtube.com/vi/2F0X9e_rbLw/maxresdefault.jpg",
-    url: "https://youtube.com/watch?v=2F0X9e_rbLw"
+    url: "/videos/signs-building-wealth"
   },
   {
     title: "Financial Literacy for Beginners: The Pilot's Checklist (ORDER MATTERS)",
     thumbnail: "https://img.youtube.com/vi/E49uORrTpzo/maxresdefault.jpg",
-    url: "https://youtube.com/watch?v=E49uORrTpzo"
+    url: "/videos/financial-literacy-beginners-checklist"
   },
   {
     title: "The Part of Compound Interest Nobody Talks About",
     thumbnail: "https://img.youtube.com/vi/AzvmOuecox4/maxresdefault.jpg",
-    url: "https://youtube.com/watch?v=AzvmOuecox4"
+    url: "/videos/compound-interest-nobody-talks-about"
   },
   {
     title: "When Your SALARY Hits, This Payday Habit Builds Real Wealth",
     thumbnail: "https://img.youtube.com/vi/t1vued4d_Cs/maxresdefault.jpg",
-    url: "https://youtube.com/watch?v=t1vued4d_Cs"
+    url: "/videos/payday-habit-builds-wealth"
   }
 ];
 ---
@@ -46,8 +56,6 @@ const videos = [
     {videos.map((video) => (
       <a
         href={video.url}
-        target="_blank"
-        rel="noopener noreferrer"
         class="group bg-gray-900/50 border border-gray-800 rounded-xl overflow-hidden hover:border-teal-500/50 transition-all hover:scale-[1.02]"
       >
         <div class="relative aspect-video bg-gray-800">
