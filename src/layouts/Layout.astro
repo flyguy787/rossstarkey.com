@@ -117,6 +117,22 @@ const socialImageURL = new URL(image, Astro.site);
       mobileMenuButton?.addEventListener('click', () => {
         mobileMenu?.classList.toggle('hidden');
       });
+
+      // Open external links in new tab
+      document.addEventListener('DOMContentLoaded', () => {
+        const links = document.querySelectorAll('a');
+        links.forEach(link => {
+          // Check if link is external (doesn't start with / or # and isn't same domain)
+          const href = link.getAttribute('href');
+          if (href && !href.startsWith('/') && !href.startsWith('#') && !href.startsWith('mailto:')) {
+            // Check if it's not already set
+            if (!link.getAttribute('target')) {
+              link.setAttribute('target', '_blank');
+              link.setAttribute('rel', 'noopener noreferrer');
+            }
+          }
+        });
+      });
     </script>
   </body>
 </html>
