@@ -4,7 +4,8 @@
       "Bash(npm create astro@latest . -- --template minimal --install --no-git --typescript strict)",
       "Bash(export PATH=\"/usr/local/bin:/opt/homebrew/bin:$PATH\")",
       "Bash(/usr/local/bin/npm --version)",
-      "Bash(/opt/homebrew/bin/npm --version)"
+      "Bash(/opt/homebrew/bin/npm --version)",
+      "Bash(curl:*)"
     ]
   }
 }
