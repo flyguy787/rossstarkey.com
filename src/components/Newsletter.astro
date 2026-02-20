@@ -9,8 +9,67 @@
     <p class="text-gray-400 mb-8 leading-relaxed">
       Get the latest posts and updates delivered directly to your inbox. No spam, unsubscribe anytime.
     </p>
-    <div class="max-w-md mx-auto">
-      <div><script src="https://app.tinyemail.com/static/js/TinyFormRenderer.js" data-ia1="b0b07f82-f37d-43e6-8e45-2ca461703ecf" data-if2="f3af4ff7-9152-4cf5-9396-426eb787cab4"></script></div>
+    <div class="max-w-md mx-auto" id="newsletter-form-container">
+      <script src="https://app.tinyemail.com/static/js/TinyFormRenderer.js" data-ia1="b0b07f82-f37d-43e6-8e45-2ca461703ecf" data-if2="f3af4ff7-9152-4cf5-9396-426eb787cab4"></script>
     </div>
   </div>
 </section>
+
+<style>
+  /* Override TinyEmail form styling to match site theme */
+  #newsletter-form-container :global(form) {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
+  @media (min-width: 640px) {
+    #newsletter-form-container :global(form) {
+      flex-direction: row !important;
+    }
+  }
+
+  #newsletter-form-container :global(input[type="email"]) {
+    flex: 1 !important;
+    padding: 12px 16px !important;
+    background-color: #0a0a0a !important;
+    border: 1px solid #374151 !important;
+    color: white !important;
+    border-radius: 8px !important;
+    font-size: 16px !important;
+    outline: none !important;
+  }
+
+  #newsletter-form-container :global(input[type="email"]:focus) {
+    border-color: #14b8a6 !important;
+    box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.2) !important;
+  }
+
+  #newsletter-form-container :global(input[type="email"]::placeholder) {
+    color: #6b7280 !important;
+  }
+
+  #newsletter-form-container :global(button),
+  #newsletter-form-container :global(input[type="submit"]) {
+    padding: 12px 24px !important;
+    background-color: #14b8a6 !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 8px !important;
+    font-weight: 500 !important;
+    font-size: 16px !important;
+    cursor: pointer !important;
+    transition: background-color 0.2s !important;
+    white-space: nowrap !important;
+  }
+
+  #newsletter-form-container :global(button:hover),
+  #newsletter-form-container :global(input[type="submit"]:hover) {
+    background-color: #0d9488 !important;
+  }
+
+  /* Hide any default TinyEmail labels or extra elements */
+  #newsletter-form-container :global(label) {
+    display: none !important;
+  }
+</style>
