@@ -19,6 +19,16 @@ const formattedDate = entry.data.date.toLocaleDateString('en-US', {
   day: 'numeric'
 });
 
+// Get related posts based on matching tags
+const allPosts = await getCollection('blog');
+const relatedPosts = allPosts
+  .filter(post =>
+    !post.data.draft &&
+    post.slug !== entry.slug &&
+    post.data.tags.some(tag => entry.data.tags.includes(tag))
+  )
+  .slice(0, 3);
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL('/og-image.jpg', Astro.site);
 
@@ -46,7 +56,10 @@ const articleSchema = {
 <Layout title={`${entry.data.title} - Ross Starkey`} description={entry.data.description}>
   <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} slot="head" />
 
-  <article class="max-w-4xl mx-auto px-6 py-16">
+  <div class="max-w-7xl mx-auto px-6 py-16">
+    <div class="grid lg:grid-cols-[1fr_300px] gap-12">
+      <!-- Main Content -->
+      <article>
     <!-- Back link -->
     <a
       href="/blog"
@@ -102,17 +115,55 @@ const articleSchema = {
       <Content />
     </div>
 
-    <!-- Article footer -->
-    <footer class="mt-16 pt-8 border-t border-gray-800">
-      <a
-        href="/blog"
-        class="inline-flex items-center gap-2 text-teal-400 hover:text-teal-300 font-medium"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-        </svg>
-        Back to Blog
-      </a>
-    </footer>
-  </article>
+        <!-- Article footer -->
+        <footer class="mt-16 pt-8 border-t border-gray-800">
+          <a
+            href="/blog"
+            class="inline-flex items-center gap-2 text-teal-400 hover:text-teal-300 font-medium"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            Back to Blog
+          </a>
+        </footer>
+      </article>
+
+      <!-- Sidebar -->
+      <aside class="space-y-8">
+        <!-- Related Posts -->
+        {relatedPosts.length > 0 && (
+          <div class="bg-gray-900/50 border border-gray-800 rounded-lg p-6">
+            <h3 class="text-xl font-bold text-white mb-4">Related Posts</h3>
+            <div class="space-y-4">
+              {relatedPosts.map(post => (
+                <a
+                  href={`/blog/${post.slug}`}
+                  class="block group"
+                >
+                  <h4 class="text-white font-medium group-hover:text-teal-400 transition-colors line-clamp-2">
+                    {post.data.title}
+                  </h4>
+                  <p class="text-sm text-gray-400 mt-1">
+                    {post.data.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                  </p>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Newsletter Signup -->
+        <div class="bg-gray-900/50 border border-gray-800 rounded-lg p-6">
+          <h3 class="text-xl font-bold text-white mb-2">Subscribe</h3>
+          <p class="text-sm text-gray-400 mb-4">
+            Get the latest posts delivered to your inbox.
+          </p>
+          <div id="sidebar-newsletter">
+            <script src="https://app.tinyemail.com/static/js/TinyFormRenderer.js" data-ia1="b0b07f82-f37d-43e6-8e45-2ca461703ecf" data-if2="f3af4ff7-9152-4cf5-9396-426eb787cab4"></script>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
 </Layout>
