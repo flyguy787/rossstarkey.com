@@ -16,11 +16,20 @@ import Layout from '../layouts/Layout.astro';
       </p>
     </div>
 
+    <!-- Success Message -->
+    <div id="success-message" class="hidden bg-teal-500/10 border border-teal-500 rounded-lg p-4 mb-8">
+      <p class="text-teal-400 font-medium">✓ Thanks for reaching out! I'll get back to you within 24-48 hours.</p>
+    </div>
+
     <div class="grid md:grid-cols-2 gap-12">
       <!-- Contact Form -->
       <div>
         <h2 class="text-2xl font-bold text-white mb-6">Send a Message</h2>
-        <form class="space-y-6">
+        <form action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
+          <!-- Web3Forms Access Key -->
+          <input type="hidden" name="access_key" value="40790f21-57a2-4189-919b-bb0121c82b76">
+          <input type="hidden" name="from_name" value="Contact Form - rossstarkey.com">
+          <input type="hidden" name="redirect" value="https://rossstarkey.com/contact?success=true">
           <div>
             <label for="name" class="block text-sm font-medium text-gray-300 mb-2">
               Name
@@ -159,4 +168,19 @@ import Layout from '../layouts/Layout.astro';
       </div>
     </div>
   </div>
+
+  <script>
+    // Show success message if redirected after form submission
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('success') === 'true') {
+      const successMessage = document.getElementById('success-message');
+      if (successMessage) {
+        successMessage.classList.remove('hidden');
+        // Scroll to top to see the message
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Remove the success param from URL
+        window.history.replaceState({}, '', '/contact');
+      }
+    }
+  </script>
 </Layout>
